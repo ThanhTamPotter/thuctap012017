@@ -78,7 +78,7 @@ TÌM HIỂU LVM
 
 - **Physical Volumes**: 
 
-	- Là những đại vật lý hoặc phân vùng đĩa của bạn chẳng hạn như /dev/hda hoặc /dev/sdb1. Khi muốn sử dụng chỉ cần mount vào là được
+	- Là những đĩa vật lý hoặc phân vùng đĩa của bạn chẳng hạn như /dev/hda hoặc /dev/sdb1. Khi muốn sử dụng chỉ cần mount vào là được
 
 	- Là một cách gọi khác của partition trong kỹ thuật LVM, nó là những thành phần cơ bản được sử dụng bởi LVM. Một Physical Volume không thể mở rộng ra ngoài phạm vi một ổ đĩa.
 
@@ -94,7 +94,7 @@ Một điểm cần lưu ý là boot loader không thể đọc `/boot` khi nó 
 
 - **Logical Volume**: Volume Group được chia nhỏ thành nhiều Logical Volume, mỗi Logical Volume có ý nghĩa tương tự như partition. Nó được dùng cho các mount point và được format với những định dạng khác nhau như ext2, ext3, ext4, … 
 
-<img src = "http://imgur.com/honnHGq.jpg">
+	<img src = "http://imgur.com/honnHGq.jpg">
 
 	- Khi dung lượng của Logical Volume được sử dụng hết ta có thể đưa thêm ổ đĩa mới bổ sung cho Volume Group và do đó tăng được dung lượng của Logical Volume
 
@@ -104,7 +104,7 @@ Một điểm cần lưu ý là boot loader không thể đọc `/boot` khi nó 
 
 	- Tổ chức và kiểm soát các tập tin.
 
-	-  Được lưu trữ trên ổ đĩa cho phép truy cập nhanh chóng và an toàn.
+	- Được lưu trữ trên ổ đĩa cho phép truy cập nhanh chóng và an toàn.
 
 	- Sắp xếp dữ liệu trên đĩa cứng máy tính.
 
@@ -197,9 +197,9 @@ Từ một Volume Group, chúng ta có thể tạo ra các Logical Volume bằng
 
 Trong đó:
 
-	-L: Chỉ ra dung lượng của logical volume
+-L: Chỉ ra dung lượng của logical volume
 
-	-n: Chỉ ra tên của logical volume
+-n: Chỉ ra tên của logical volume
 
 **lv-demo1** là tên Logical Volume, **vg-demo** là Volume Group mà mình vừa tạo ở bước trước.
 
