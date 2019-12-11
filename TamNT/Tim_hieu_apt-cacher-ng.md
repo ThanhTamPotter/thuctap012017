@@ -13,6 +13,8 @@
 	- [2.2.1.	Cấu hình server](#2.2.1)
 
 	- [2.2.2.	Cấu hình trên Client](#2.2.2)
+	
+	- [2.2.3. Cấu hình passthrough repo https](#2.2.3)
 
 [2.3.	Kiểm tra lại hoạt động](#2.3)
 
@@ -111,6 +113,25 @@ Chuẩn bị:
 
 - Lưu lại là xong. Bây giờ, các máy client trong mạng LAN có thể cài đặt và cập nhật các gói phần mềm thông qua proxy apt-cacher-ng. 
 
+<a name = '2.2.3'></a>
+### 2.2.3. Cấu hình PassThrough https 
+Với cấu hình mặc, **apt-cache-ng**  thường làm việc với các repo http, không làm việc với các repository thông qua SSL/TLS (https) (ví dụ: https://download.docker.com, ...). Để cho phép các remote client có thể download các gói từ repo https, cần phải cấu hình passthrough. 
+
+apt-cache-ng cần được cấu hình thủ công các domain nào sẽ được kết nối cho phép https thông qua tùy chọn `PassThroughPattern` trong file cấu hình `/etc/apt-cache-ng/acng.conf`. Ví dụ, để remote server download gói phần mềm `docker-ce` từ repo: `deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable`, cấu hình trên server apt-cache-ng passthrough domain download.docker.com như sau: 
+
+```
+PassThroughPattern: (download\.docker\.com|get\.docker\.com):443$
+```
+Hoặc nhiều domain: 
+
+```
+PassThroughPattern: download\.docker\.com:443$
+```
+
+Thực hiện restart lại service **apt-cache-ng**
+
+***Lưu ý***: Một khi `PassThroughPattern` được thiết lập, apt-cache-ng sẽ chỉ đóng vai trò như proxy mà không cache lại các gói và index download về từ các SSL/TLS repository. Bởi vì nó không thể hiểu được luồng lưu lượng đã mã hóa mà nó chỉ là proxy.
+
 <a name = '2.3'></a>
 ## 2.3.	Kiểm tra lại hoạt động
 
@@ -139,3 +160,5 @@ Chuẩn bị:
 [2] https://www.unix-ag.uni-kl.de/~bloch/acng/html/index.html
 
 [3] http://adminsonline.in/?p=64 
+
+[4] Using apt-cache-ng with ssl/tls: https://blog.packagecloud.io/eng/2015/05/05/using-apt-cacher-ng-with-ssl-tls/
